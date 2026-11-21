@@ -1,0 +1,268 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+  --bg-paper: #efe7d6;
+  --bg-vellum: #f8f2e4;
+  --bg-manila: #e4d7be;
+  --text-ink: #1a1714;
+  --text-sepia: #5b5246;
+  --accent-emerald: #1d5b3a;
+  --accent-highlighter: #d7e5c8;
+  --accent-cobalt: #1e4a7a;
+  --accent-rust: #9a2f22;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #efe7d6;
+  color: #1a1714;
+  font-size: 16px;
+}
+
+body {
+  font-family: 'Kalam', cursive, system-ui, sans-serif;
+  letter-spacing: 0.008em;
+  background-color: #efe7d6;
+  color: #1a1714;
+  overflow-x: hidden;
+  /* Warm candlelit/desk-lamp archival parchment vignette */
+  background-image:
+    radial-gradient(ellipse at 50% 22%, rgba(252, 249, 240, 0.92) 0%, rgba(239, 231, 214, 0.55) 55%, rgba(212, 198, 171, 0.58) 100%);
+}
+
+/* Subtle paper fiber vignette without expensive full-screen feTurbulence repaints */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 100;
+  opacity: 0.28;
+  background-image: radial-gradient(circle at 50% 50%, transparent 65%, rgba(186, 168, 134, 0.25) 100%);
+}
+
+/* Custom antique scrollbars */
+::-webkit-scrollbar {
+  width: 9px;
+  height: 9px;
+}
+::-webkit-scrollbar-track {
+  background: #e4d7be;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(26, 23, 20, 0.28);
+  border-radius: 3px;
+  border: 2px solid #e4d7be;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 91, 58, 0.62);
+}
+
+@layer components {
+  .paper-nav {
+    background: rgba(248, 242, 228, 0.94);
+    border: 1px solid rgba(26, 23, 20, 0.18);
+    box-shadow:
+      0 6px 20px rgba(26, 23, 20, 0.09),
+      inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  }
+
+  .paper-nav-scrolled {
+    background: rgba(252, 249, 240, 0.98);
+    border-color: rgba(26, 23, 20, 0.24);
+    box-shadow:
+      0 10px 26px rgba(26, 23, 20, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  }
+
+  .paper-sheet {
+    position: relative;
+    background: linear-gradient(180deg, #fcf9f0 0%, #f5eddb 100%);
+    border: 1px solid rgba(26, 23, 20, 0.18);
+    box-shadow:
+      0 2px 5px rgba(26, 23, 20, 0.06),
+      0 12px 26px rgba(26, 23, 20, 0.08),
+      inset 0 0 28px rgba(210, 194, 163, 0.18);
+  }
+
+  .paper-sheet-deep {
+    position: relative;
+    background: #fcf9f0;
+    border: 1px solid rgba(26, 23, 20, 0.22);
+    box-shadow:
+      0 5px 12px rgba(26, 23, 20, 0.08),
+      0 24px 48px rgba(26, 23, 20, 0.14),
+      inset 0 0 34px rgba(210, 194, 163, 0.22);
+  }
+
+  /* Physical stacked-folio archival dossier card */
+  .paper-dossier {
+    position: relative;
+    background: linear-gradient(180deg, #fcf8ee 0%, #f4ebd8 100%);
+    border: 1px solid rgba(26, 23, 20, 0.2);
+    box-shadow:
+      4px 4px 0 0 #dfd2b8,
+      4px 4px 0 1px rgba(26, 23, 20, 0.16),
+      0 14px 28px rgba(26, 23, 20, 0.08),
+      inset 0 0 24px rgba(196, 178, 144, 0.16);
+    transition:
+      transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.25s ease;
+  }
+
+  .paper-dossier:hover {
+    transform: translate(-2px, -4px);
+    border-color: rgba(29, 91, 58, 0.55);
+    box-shadow:
+      7px 7px 0 0 #d5c5a5,
+      7px 7px 0 1px rgba(26, 23, 20, 0.2),
+      0 20px 38px rgba(26, 23, 20, 0.12);
+  }
+
+  /* Semi-translucent masking / washi tape strip */
+  .washi-tape {
+    position: relative;
+    background: linear-gradient(
+      90deg,
+      rgba(227, 211, 176, 0.82) 0%,
+      rgba(238, 224, 194, 0.92) 50%,
+      rgba(222, 205, 168, 0.82) 100%
+    );
+    border-top: 1px dashed rgba(26, 23, 20, 0.14);
+    border-bottom: 1px dashed rgba(26, 23, 20, 0.14);
+    box-shadow: 0 2px 4px rgba(26, 23, 20, 0.08);
+  }
+
+  .washi-tape-moss {
+    background: linear-gradient(
+      90deg,
+      rgba(198, 216, 182, 0.78) 0%,
+      rgba(215, 229, 200, 0.88) 50%,
+      rgba(193, 212, 177, 0.78) 100%
+    );
+    border-top: 1px dashed rgba(29, 91, 58, 0.2);
+    border-bottom: 1px dashed rgba(29, 91, 58, 0.2);
+    box-shadow: 0 2px 5px rgba(26, 23, 20, 0.08);
+  }
+
+  /* Tactile letterpress ink button */
+  .ink-press-btn {
+    box-shadow: 3px 3px 0 0 rgba(26, 23, 20, 0.25);
+    transition: transform 0.16s ease, box-shadow 0.16s ease, background-color 0.2s ease;
+  }
+  .ink-press-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 0 rgba(29, 91, 58, 0.35);
+  }
+  .ink-press-btn:active {
+    transform: translate(2px, 2px);
+    box-shadow: 1px 1px 0 0 rgba(26, 23, 20, 0.22);
+  }
+
+  .paper-manila {
+    background: #e9dec7;
+    border: 1px solid rgba(26, 23, 20, 0.14);
+    box-shadow: inset 0 1px 3px rgba(26, 23, 20, 0.05);
+  }
+
+  .paper-chip {
+    background: #f5efe2;
+    border: 1px solid rgba(26, 23, 20, 0.18);
+    box-shadow: 1px 1px 0 rgba(26, 23, 20, 0.07);
+    transition: border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  }
+
+  .paper-chip:hover {
+    background: #fcf9f0;
+    border-color: rgba(26, 23, 20, 0.36);
+  }
+
+  .paper-input {
+    background: #fcf9f0;
+    border: 1px solid rgba(26, 23, 20, 0.22);
+    box-shadow: inset 0 1px 3px rgba(26, 23, 20, 0.06);
+    color: #1a1714;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .paper-input:focus {
+    outline: none;
+    border-color: #1d5b3a;
+    box-shadow:
+      inset 0 1px 3px rgba(26, 23, 20, 0.04),
+      0 0 0 3px rgba(215, 229, 200, 0.72);
+  }
+
+  .paper-divider {
+    border-top: 1px dashed rgba(26, 23, 20, 0.22);
+  }
+
+  .paper-stamp {
+    border: 1.5px solid currentColor;
+    box-shadow: inset 0 0 0 1px rgba(252, 249, 240, 0.45);
+  }
+
+  .marker-highlight {
+    background: linear-gradient(
+      104deg,
+      rgba(215, 229, 200, 0) 0.9%,
+      rgba(215, 229, 200, 0.92) 2.4%,
+      rgba(215, 229, 200, 0.78) 97%,
+      rgba(215, 229, 200, 0) 99%
+    );
+    padding: 0.03em 0.22em;
+    border-radius: 0.16em;
+  }
+
+  .bg-drafting-grid {
+    background-image:
+      linear-gradient(to right, rgba(26, 23, 20, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(26, 23, 20, 0.05) 1px, transparent 1px);
+    background-size: 32px 32px;
+  }
+
+  .bg-ruled-paper {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 29px,
+      rgba(30, 74, 122, 0.11) 30px
+    );
+  }
+
+  .font-typewriter {
+    font-family: 'Special Elite', 'Courier Prime', monospace;
+  }
+}
+
+@keyframes marquee-scroll {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.animate-marquee {
+  animation: marquee-scroll 42s linear infinite;
+  will-change: transform;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
